@@ -37,6 +37,18 @@ public class Attachable : MonoBehaviour
         }
     }
 
+    public void Step(int index)
+    {
+        foreach (Attachable attachment in connectedAttachements)
+        {
+            if (attachment.parentAttachmentPoint == attachmentPoints[index])
+            {
+                attachment.Step();
+                return;
+            }
+        }
+    }
+
     public void Attach(Attachable attachable, Transform attachmentPoint)
     {
         if(parent != attachable)
