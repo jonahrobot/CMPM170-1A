@@ -72,7 +72,7 @@ public class Draggable : MonoBehaviour
             {
                 attachable.Detach();
             }
-            if (nearestDistSq < ROTATE_DISTANCE * ROTATE_DISTANCE)
+            if (nearestDistSq < ROTATE_DISTANCE * ROTATE_DISTANCE && !nearestAttachable.IsConnected(nearestAttachmentPoint))
             {
                 float rootAngle = (attachable.attachmentRoot.eulerAngles.z - transform.eulerAngles.z);
                 transform.rotation = Quaternion.Euler(0, 0, (nearestAttachmentPoint.eulerAngles.z + 180) - rootAngle);

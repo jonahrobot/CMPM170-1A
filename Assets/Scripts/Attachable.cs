@@ -51,6 +51,10 @@ public class Attachable : MonoBehaviour
 
     public void Attach(Attachable attachable, Transform attachmentPoint)
     {
+        if(attachable.IsConnected(attachmentPoint))
+        {
+            return;
+        }
         if(parent != attachable)
         {
             Detach();
@@ -73,5 +77,17 @@ public class Attachable : MonoBehaviour
     public bool IsConnected()
     {
         return parent != null;
+    }
+
+    public bool IsConnected(Transform attachmentPoint)
+    {
+        foreach (Attachable attachment in connectedAttachements)
+        {
+            if (attachment.parentAttachmentPoint == attachmentPoint)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
