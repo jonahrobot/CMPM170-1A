@@ -14,27 +14,17 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        Vector2 movement = Vector2.zero;
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             attachable.Step();
         }
-        if (Input.GetKey(KeyCode.W))
-        {
-            movement += Vector2.up;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            movement += Vector2.left;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            movement += Vector2.down;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            movement += Vector2.right;
-        }
-        transform.Translate(movement.normalized * Time.deltaTime * speed);
+
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
+        Vector2 movement = new Vector2(moveHorizontal, moveVertical);
+
+        transform.Translate(movement * speed * Time.deltaTime);
+
     }
 }
