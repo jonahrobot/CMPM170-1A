@@ -66,10 +66,18 @@ public class Draggable : MonoBehaviour
             float rootDistSq = (nearestAttachmentPoint.position - rootPos).sqrMagnitude;
             if (rootDistSq < SNAP_DISTANCE * SNAP_DISTANCE)
             {
+                if (transform.GetComponent<SpriteRenderer>())
+                {
+                    transform.GetComponent<SpriteRenderer>().sortingOrder = 1;
+                }
                 attachable.Attach(nearestAttachable, nearestAttachmentPoint);
             }
             else
             {
+                if (transform.GetComponent<SpriteRenderer>())
+                {
+                    transform.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                }
                 attachable.Detach();
             }
             if (nearestDistSq < ROTATE_DISTANCE * ROTATE_DISTANCE && !nearestAttachable.IsConnected(nearestAttachmentPoint))

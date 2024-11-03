@@ -1,5 +1,7 @@
+using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Attachable))]
 public class Player : MonoBehaviour
 {
@@ -25,6 +27,5 @@ public class Player : MonoBehaviour
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
 
         transform.Translate(movement * speed * Time.deltaTime);
-
     }
 }
