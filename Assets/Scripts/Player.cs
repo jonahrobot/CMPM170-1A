@@ -6,7 +6,15 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float movementSpeed = 1.0f;
+    [Range(0f, 100f)]
+    public float movementMax = 4.0f;
+    [Range(0f, 10f)]
+    public float movementMin = 1.0f;
     public float beatRateInSeconds = 1.0f;
+    [Range(0f, 10f)]
+    public float beatRateMin = 0.2f;
+    [Range(0f, 10f)]
+    public float beatRateMax = 1f;
 
     int beatTrack = 1;
 
@@ -30,13 +38,13 @@ public class Player : MonoBehaviour
         // Accelerate and decelerate
         if (movement.magnitude > 0.02f)
         {
-            movementSpeed = Mathf.Clamp(movementSpeed * 1.05f, 1,4);
-            beatRateInSeconds = Mathf.Clamp(beatRateInSeconds - (0.15f * Time.deltaTime), 0.2f, 1);
+            movementSpeed = Mathf.Clamp(movementSpeed * 1.05f, movementMin, movementMax);
+            beatRateInSeconds = Mathf.Clamp(beatRateInSeconds - (0.15f * Time.deltaTime), beatRateMin, beatRateMax);
         }
         else
         {
-            movementSpeed = Mathf.Clamp(movementSpeed * 0.75f, 1, 4);
-            beatRateInSeconds = Mathf.Clamp(beatRateInSeconds + (1f * Time.deltaTime), 0.2f, 1);
+            movementSpeed = Mathf.Clamp(movementSpeed * 0.75f, movementMin, movementMax);
+            beatRateInSeconds = Mathf.Clamp(beatRateInSeconds + (1f * Time.deltaTime), beatRateMin, beatRateMax);
         }
 
         // Pulse
