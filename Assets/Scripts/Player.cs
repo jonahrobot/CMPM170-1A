@@ -20,18 +20,26 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            attachable.Step();
-        }
-
+        // Move
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
 
         transform.Translate(movement * movementSpeed * Time.deltaTime);
 
+        // Accelerate and decelerate
+        if (movement.magnitude > 0.02f)
+        {
+            movementSpeed = Mathf.Clamp(movementSpeed * 1.05f, 1,4);
+            beatRateInSeconds = Mathf.Clamp(beatRateInSeconds - (0.15f * Time.deltaTime), 0.2f, 1);
+        }
+        else
+        {
+            movementSpeed = Mathf.Clamp(movementSpeed * 0.75f, 1, 4);
+            beatRateInSeconds = Mathf.Clamp(beatRateInSeconds + (1f * Time.deltaTime), 0.2f, 1);
+        }
+
+        // Pulse
         if(transform.localScale.x > 1 && transform.localScale.y > 1)
         {
             transform.localScale = new Vector3(transform.localScale.x - 1f * Time.deltaTime, transform.localScale.y - 1f * Time.deltaTime, 1);
