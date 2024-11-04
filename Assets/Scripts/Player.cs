@@ -62,14 +62,22 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(beatRateInSeconds);
 
-        // Play sound main
-        attachable.Step(1);
+        for (int i = 0; i < 3; i++)
+        {
+            if(Random.Range(0, 3) == 0)
+            {
+                attachable.Step(i);
+            }
+        }
 
-        // Play every other beat
-        if(beatTrack % 2 == 0) attachable.Step(2);
+        //// Play sound main
+        //attachable.Step(1);
 
-        // Play every fourth beat
-        if (beatTrack % 4 == 0) attachable.Step(0);
+        //// Play every other beat
+        //if(beatTrack % 2 == 0) attachable.Step(2);
+
+        //// Play every fourth beat
+        //if (beatTrack % 4 == 0) attachable.Step(0);
 
         beatTrack += 1;
         transform.localScale = new Vector3(1.5f, 1.5f, 1);
